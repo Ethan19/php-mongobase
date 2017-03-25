@@ -19,12 +19,21 @@ class MongoBase{
 		$this->collection = $collection;
 		$this->manager = new MongoDB\Driver\Manager("mongodb://".$this->host.":".$this->port);//链接mongodb
 		$this->writeConcern = new MongoDB\Driver\writeConcern('majority',100);
-		$this->bulk = new MongoDB\Driver\BulkWrite();
+		$this->bulk = new MongoDB\Driver\BulkWrite();//增删改
 
 	}
 
+	// link  http://php.net/manual/zh/mongodb-driver-manager.executequery.php
+	public function mongoSelect($filter=array(),$option=array()){
+		$query  = new MongoDB\Driver\Query($filter,$option);
+		$cursor = $this->manager->executeQuery($this->db.'.'.$this->collection,$query);
+		foreach ($cursor as $key => $value) {
+			$arr[] = $value;
+			# code...
+		}
+		return $arr;
+		        
 
-	public function mongoSelect(){
 
 	}
 
@@ -109,7 +118,7 @@ class MongoBase{
 	// $arr = array("username"=>"add","x"=>"123");
 	$where = array("username"=>"add");
 	// $data = array('$set'=>array("x"=>"ethan"));
-	$mongo->mongoDeleteBulk($where);
+	$mongo->mongoSelect();
 
 	        
 
