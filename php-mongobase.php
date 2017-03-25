@@ -23,6 +23,7 @@ class MongoBase{
 
 	}
 
+	//'allowPartialResults', 'batchSize', 'comment', 'limit', 'maxTimeMS', 'noCursorTimeout', 'oplogReplay', 'projection', 'readConcern', 'skip', 'sort'
 	// link  http://php.net/manual/zh/mongodb-driver-manager.executequery.php
 	public function mongoSelect($filter=array(),$option=array()){
 		$query  = new MongoDB\Driver\Query($filter,$option);
